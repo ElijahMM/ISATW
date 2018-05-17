@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+{% block content %}
+    <div class="main" style="display: flex; background: white; position: relative; width: 100%">
+        <div class="wrapper_home" style="display: flex">
+            {% load static %}
+            <img src="{% static "images/usv_logo.png" %}" alt="My image" height="250" width="800"
+                 style="position: absolute; left: 0; right: 0; margin: 100px auto auto;"/>
+            <form action="{% url 'user_app:login' %}" method="post" name="Login_Form"
+                  class="form-signin" style="margin: auto; width: 50%"
+                  autocomplete="off">
+                {% csrf_token %}
+                <h3 class="form-signin-heading">Welcome! Please Sign In</h3>
+
+                <div class="form-group">
+                    {% for field in form %}
+                        <div class="input-group">
+                            {% if field.label == 'Email' %}
+                                <span class="input-group-addon" style="background-color:blue; color:white"><span
+                                        class="glyphicon glyphicon-user"></span></span>
+                            {% else %}
+                                <span class="input-group-addon" style="background-color:blue; color:white"><span
+                                        class="glyphicon glyphicon-lock"></span></span>
+                            {% endif %}
+                            <input class="form-control"
+                                   id="{{ field.id_for_label }}"
+                                   maxlength="30"
+                                   name="{{ field.html_name }}"
+                                   placeholder="{{ field.label }}"
+                                   type="{{ field.label }}"
+                                   required
+                            />
+                        </div>
+
+                        <br>
+                    {% endfor %}
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
