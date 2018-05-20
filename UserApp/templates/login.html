@@ -34,9 +34,22 @@
                                    required
                             />
                         </div>
-
                         <br>
                     {% endfor %}
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login
                 </button>
