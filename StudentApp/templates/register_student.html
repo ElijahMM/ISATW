@@ -1,0 +1,30 @@
+{% extends "base_logedin_staff.html" %}
+
+{% block content %}
+    <!doctype html>
+    <html>
+
+    <div class="content-agileits">
+        <h1 class="title">Inregistreaza un nou student</h1>
+        <div class="center">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br>
+                <input type="submit" class="btn btn-primary pull-right" value="Submit"/>
+            </form>
+        </div>
+    </div>
+    <p class="copyright-w3ls">© 2017 Student Registration Form. All Rights Reserved | Design by<a
+            href="https://w3layouts.com/" target="_blank">W3layouts</a>
+    </p>
+    {% load static %}
+    <!-- js -->
+    <script src="{% static  'js/jquery-2.1.4.min.js ' %}"></script>
+    <!-- //js -->
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/validator.min.js' %}"></script>
+
+    <!-- /js files -->
+{% endblock %}

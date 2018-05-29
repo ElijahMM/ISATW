@@ -56,7 +56,6 @@ i, span {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 .wrapper {
-    height: 100%;
     background: white;
     display: flex;
     align-items: stretch;
@@ -167,6 +166,11 @@ a[aria-expanded="true"]::before {
     content: '\e260';
 }
 
+
+h3{
+	font-size: 1.82em !important;
+}
+
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
@@ -198,10 +202,9 @@ a.article, a.article:hover {
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-#content {
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
+#content-area {
+    position: relative;
+    width: 100%;
 }
 
 /* ---------------------------------------------------

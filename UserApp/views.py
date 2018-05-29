@@ -1,16 +1,25 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+
 
 # Create your views here.
 from django.views.generic import TemplateView
 
 
-class HomePageView(TemplateView):
-    template_name = 'home.html'
+from UserApp.models import User
+
+
+class HomePageView(TemplateView, User):
+    if User.is_superuser:
+        template_name = 'home.html'
+    else:
+        template_name = 'home1.html'
+
+
+class RegisterProfesor(TemplateView):
+    template_name = "register_profesor.html"
 
 
 class LoginPageView(TemplateView):
     template_name = 'login.html'
-
