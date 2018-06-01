@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 
 
 from StudentApp.views import (
@@ -6,6 +6,5 @@ from StudentApp.views import (
 )
 
 urlpatterns = [
-
     url(r'^registerStudent', RegisterStudent.as_view(), name='register_student')
 ]

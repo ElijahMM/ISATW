@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.views.generic import  FormView
+from django.views.generic import FormView
 
 from StudentApp.forms import StudentForm
 
@@ -17,4 +17,4 @@ class RegisterStudent(FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, 'Successfully enrolled.')
-        return redirect('register_profesor:home1')
+        return redirect('register_professor:home1')
