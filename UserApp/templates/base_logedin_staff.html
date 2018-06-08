@@ -29,45 +29,46 @@
 </head>
 
 <body>
+<nav id="sidebar">
+    <!-- Sidebar Header -->
+    <div id="sidebarCollapse" class="sidebar-header">
+        <h3>Licente Mananger</h3>
+        <strong>LM</strong>
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+        <li>
+            <a href="{% url  'user_app:home' %}">
+                <i class="glyphicon glyphicon-home"></i>
+                Acasa
+            </a>
+        </li>
+        <li>
+            <a href="{% url  'user_app:register_profesor' %}">
+                <i class="glyphicon glyphicon-send"></i>
+                Inregistreaza profesor
+            </a>
+        </li>
+        <li>
+            <a href="{% url  'student_app:register_student' %}">
+                <i class="glyphicon glyphicon-link"></i>
+                Inregistreaza student
+            </a>
+        </li>
+        <li>
+            <a href="{% url  'student_app:view_students' %}">
+                <i class="glyphicon glyphicon-link"></i>
+                Vizualizare students
+            </a>
+        </li>
+
+    </ul>
+</nav>
 <div class="wrapper">
 
-    <nav id="sidebar">
-        <!-- Sidebar Header -->
-        <div id="sidebarCollapse" class="sidebar-header">
-            <h3>Licente Mananger</h3>
-            <strong>LM</strong>
-        </div>
 
-        <!-- Sidebar Links -->
-        <ul class="list-unstyled components">
-            <li>
-                <a href="{% url  'user_app:home' %}">
-                    <i class="glyphicon glyphicon-home"></i>
-                    Acasa
-                </a>
-            </li>
-            <li>
-                <a href="{% url  'user_app:register_profesor' %}">
-                    <i class="glyphicon glyphicon-send"></i>
-                    Inregistreaza profesor
-                </a>
-            </li>
-            <li>
-                <a href="{% url  'student_app:register_student' %}">
-                    <i class="glyphicon glyphicon-link"></i>
-                    Inregistreaza student
-                </a>
-            </li>
-            <li>
-                <a href="{% url  'student_app:view_students' %}">
-                    <i class="glyphicon glyphicon-link"></i>
-                    Vizualizare students
-                </a>
-            </li>
-
-        </ul>
-    </nav>
-    <div id="content-area" style="width: 100%">
+    <div id="content-area" style="width: 100%; background-color: #fff;">
         {% block content %}
         {% endblock %}
     </div>
@@ -82,9 +83,12 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+
         $('.mdb-select').material_select();
     });
 
+
 </script>
+
 </body>
 </html>

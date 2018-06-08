@@ -3,13 +3,16 @@
 */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-html, body {
+html {
     height: 100%;
+    background-color: white;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    background: white;
+    position: relative;
+    min-height: 100%;
 }
 
 p {
@@ -59,9 +62,13 @@ i, span {
     background: white;
     display: flex;
     align-items: stretch;
+    margin-left: 250px;
 }
 
 #sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
     min-width: 250px;
     max-width: 250px;
     background: #7386D5;
@@ -166,9 +173,8 @@ a[aria-expanded="true"]::before {
     content: '\e260';
 }
 
-
-h3{
-	font-size: 1.82em !important;
+h3 {
+    font-size: 1.82em !important;
 }
 
 ul ul a {
