@@ -19,3 +19,5 @@ class HomePageView(TemplateView, User):
 
 class LoginPageView(TemplateView):
     template_name = 'login.html'
+
+

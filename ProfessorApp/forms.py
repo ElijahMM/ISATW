@@ -1,6 +1,6 @@
 from django import forms
 
-from ProfessorApp.models import Professor
+from ProfessorApp.models import Professor, Facultate
 
 
 class ProfessorForm(forms.ModelForm):
@@ -13,3 +13,5 @@ class ProfessorForm(forms.ModelForm):
         super(ProfessorForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+        self.fields['faculty'].queryset = Facultate.objects.all()

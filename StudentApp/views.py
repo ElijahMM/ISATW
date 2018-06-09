@@ -5,9 +5,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.views.generic import FormView
 
+from django.views.generic import FormView, ListView
 from StudentApp.forms import StudentForm
+from StudentApp.models import Student
 
 
 class RegisterStudent(FormView):
@@ -18,3 +19,12 @@ class RegisterStudent(FormView):
         form.save()
         messages.success(self.request, 'Successfully enrolled.')
         return redirect('register_professor:home1')
+
+
+class ViewStudents(ListView):
+    template_name = "view_students.html"
+    model = Student
+
+    def get_queryset(self):
+        query = Student.objects.all()
+        return query

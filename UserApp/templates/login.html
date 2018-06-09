@@ -10,10 +10,11 @@
             <img src="{% static "images/usv_logo.png" %}" alt="My image" height="250" width="800"
                  style="position: absolute; left: 0; right: 0; margin: 100px auto auto;"/>
             <form action="{% url 'user_app:login' %}" method="post" name="Login_Form"
-                  class="form-signin" style="margin: auto; width: 50%"
+
+                  class="form-signin" style="margin: 30% auto auto; width: 50%"
                   autocomplete="off">
                 {% csrf_token %}
-                <h3 class="form-signin-heading">Welcome! Please Sign In</h3>
+                <h3 class="form-signin-heading" style="text-align: center">Welcome! Please Sign In</h3>
 
                 <div class="form-group">
                     {% for field in form %}

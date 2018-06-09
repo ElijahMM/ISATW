@@ -20,19 +20,8 @@ class Facultate(models.Model):
     pass
 
 
-class Specializare(models.Model):
-    name = models.CharField(max_length=254, blank=True)
-    facultate = models.ForeignKey(Facultate, on_delete=models.CASCADE, default=0)
-
-    def __str__(self):
-        return self.name
-
-    pass
-
-
 class Professor(models.Model):
-    cnp = models.IntegerField(unique=True, editable=True)
-    nr_matricol = models.CharField(primary_key=True, unique=True, max_length=254)
+    cnp = models.IntegerField(primary_key=True, unique=True, editable=True)
     first_name = models.CharField(max_length=254, blank=True)
     last_name = models.CharField(max_length=254, blank=True)
     phone = models.CharField(max_length=254, blank=True)

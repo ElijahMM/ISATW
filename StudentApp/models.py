@@ -32,7 +32,7 @@ class Specializare(models.Model):
 
 class Student(models.Model):
     cnp = models.IntegerField(unique=True, editable=True)
-    nr_matricol = models.CharField(primary_key=True, unique=True, max_length=254)
+    nr_matricol = models.CharField(primary_key=True, unique=True, max_length=254, editable=True)
     first_name = models.CharField(max_length=254, blank=True)
     last_name = models.CharField(max_length=254, blank=True)
     phone = models.CharField(max_length=254, blank=True)

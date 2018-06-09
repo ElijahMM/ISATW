@@ -26,7 +26,6 @@ class Migration(migrations.Migration):
             name='Professor',
             fields=[
                 ('cnp', models.IntegerField(unique=True)),
-                ('nr_matricol', models.CharField(max_length=254, primary_key=True, serialize=False, unique=True)),
                 ('first_name', models.CharField(blank=True, max_length=254)),
                 ('last_name', models.CharField(blank=True, max_length=254)),
                 ('phone', models.CharField(blank=True, max_length=254)),
@@ -36,13 +35,5 @@ class Migration(migrations.Migration):
                 ('update_at', models.DateTimeField(default=django.utils.timezone.now, verbose_name='update_at')),
                 ('faculty', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='ProfessorApp.Facultate')),
             ],
-        ),
-        migrations.CreateModel(
-            name='Specializare',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=254)),
-                ('facultate', models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='ProfessorApp.Facultate')),
-            ],
-        ),
+        )
     ]
