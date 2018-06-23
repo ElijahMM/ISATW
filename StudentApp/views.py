@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic import FormView, ListView
-
 from StudentApp.forms import StudentForm
 from StudentApp.models import Facultate
 from StudentApp.models import Specializare
