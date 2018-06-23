@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -22,21 +21,17 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.2/js/mdb.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     <!-- Add additional CSS in static file -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
-
+`
 <body>
 <nav id="sidebar">
     <!-- Sidebar Header -->
-    <div id="sidebarCollapse" class="sidebar-header">
-        <h3>Licente Mananger</h3>
-        <strong>LM</strong>
-    </div>
-
-    <!-- Sidebar Links -->
     <ul class="list-unstyled components">
         <li>
             <a href="{% url  'user_app:home' %}">
@@ -44,6 +39,7 @@
                 Acasa
             </a>
         </li>
+        {% if user.is_authenticated %}
         <li>
             <a href="{% url  'professor_app:register_professor' %}">
                 <i class="glyphicon glyphicon-send"></i>
@@ -68,7 +64,29 @@
                 Vizualizare students
             </a>
         </li>
+        <br>
+        <li>
+
+            <a href="{% url  'user_app:logout' %}">
+                <i class="glyphicon glyphicon-log-out"></i>
+                Log out
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url  'user_app:login' %}">
+                <i class="glyphicon glyphicon-log-in"></i>
+                Log in
+            </a>
+        </li>
+        {% endif %}
     </ul>
+
+    <!-- Sidebar Links -->
+    <div id="sidebarCollapse" class="sidebar-header">
+        <h3>Licente Mananager</h3>
+        <strong>LM</strong>
+    </div>
 </nav>
 <div class="wrapper">
 
@@ -90,6 +108,12 @@
 
         $('.mdb-select').material_select();
     });
+
+
+
+
+
+
 
 
 </script>

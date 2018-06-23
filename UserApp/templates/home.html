@@ -1,5 +1,9 @@
 {% extends "base_logedin_staff.html" %}
 
 {% block content %}
-
+<center>{% if user.is_authenticated %}
+    <p>Welcome home, {{ user.get_username }}. Thanks for logging in.  Last login: {{ user.last_login }}</p>
+{% else %}
+    <p>Welcome home, new user. Please log in.</p>
+{% endif %}</center>
 {% endblock %}
