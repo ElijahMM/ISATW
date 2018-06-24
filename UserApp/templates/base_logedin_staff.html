@@ -40,45 +40,57 @@
             </a>
         </li>
         {% if user.is_authenticated %}
-        <li>
-            <a href="{% url  'professor_app:register_professor' %}">
-                <i class="glyphicon glyphicon-send"></i>
-                Inregistreaza profesor
-            </a>
-        </li>
-        <li>
-            <a href="{% url  'professor_app:view_professors' %}">
-                <i class="glyphicon glyphicon-send"></i>
-                Vizualizare profesori
-            </a>
-        </li>
-        <li>
-            <a href="{% url  'student_app:register_student' %}">
-                <i class="glyphicon glyphicon-link"></i>
-                Inregistreaza student
-            </a>
-        </li>
-        <li>
-            <a href="{% url  'student_app:view_students' %}">
-                <i class="glyphicon glyphicon-link"></i>
-                Vizualizare students
-            </a>
-        </li>
-        <br>
-        <li>
+            <li>
+                <a href="{% url  'professor_app:register_professor' %}">
+                    <i class="glyphicon glyphicon-send"></i>
+                    Inregistreaza profesor
+                </a>
+            </li>
+            <li>
+                <a href="{% url  'professor_app:view_professors' %}">
+                    <i class="glyphicon glyphicon-send"></i>
+                    Vizualizare profesori
+                </a>
+            </li>
+            <li>
+                <a href="{% url  'student_app:register_student' %}">
+                    <i class="glyphicon glyphicon-link"></i>
+                    Inregistreaza student
+                </a>
+            </li>
+            <li>
+                <a href="{% url  'student_app:view_students' %}">
+                    <i class="glyphicon glyphicon-link"></i>
+                    Vizualizare students
+                </a>
+            </li>
+            <li>
+                <a href="{% url  'professor_app:register_lucrare' %}">
+                    <i class="glyphicon glyphicon-link"></i>
+                    Inregistreaza lucrare
+                </a>
+            </li>
+            <li>
+                <a href="{% url  'professor_app:view_lucrare' %}">
+                    <i class="glyphicon glyphicon-link"></i>
+                    Vizualizare lucrare
+                </a>
+            </li>
+            <br>
+            <li>
 
-            <a href="{% url  'user_app:logout' %}">
-                <i class="glyphicon glyphicon-log-out"></i>
-                Log out
-            </a>
-        </li>
+                <a href="{% url  'user_app:logout' %}">
+                    <i class="glyphicon glyphicon-log-out"></i>
+                    Log out
+                </a>
+            </li>
         {% else %}
-        <li>
-            <a href="{% url  'user_app:login' %}">
-                <i class="glyphicon glyphicon-log-in"></i>
-                Log in
-            </a>
-        </li>
+            <li>
+                <a href="{% url  'user_app:login' %}">
+                    <i class="glyphicon glyphicon-log-in"></i>
+                    Log in
+                </a>
+            </li>
         {% endif %}
     </ul>
 
@@ -108,12 +120,6 @@
 
         $('.mdb-select').material_select();
     });
-
-
-
-
-
-
 
 
 </script>

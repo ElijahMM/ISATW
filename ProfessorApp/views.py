@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, FormView, ListView
 from django.contrib import messages
-from ProfessorApp.forms import ProfessorForm
-from ProfessorApp.models import Professor
+from ProfessorApp.forms import ProfessorForm, LucrareForm
+from ProfessorApp.models import Professor, Lucrare
+from StudentApp.models import Facultate
 
 
 class RegisterProfessor(FormView):
@@ -14,8 +16,8 @@ class RegisterProfessor(FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'Successfully enrolled.')
-        return redirect('register_professor:home')
+        messages.success(self.request, 'Profesor inregistrat cu succes.')
+        return redirect('professor_app:register_professor')
 
 
 class ViewProfessors(ListView):
@@ -24,4 +26,27 @@ class ViewProfessors(ListView):
 
     def get_queryset(self):
         query = Professor.objects.all()
-        return query
+        facs = Facultate.objects.all()
+        obj = {'professors': query, 'facs': facs}
+        return obj
+
+
+class ViewLucrari(ListView):
+    template_name = "view_lucrari.html"
+    model = Lucrare
+
+    def get_queryset(self):
+        query = Lucrare.objects.all()
+        facs = Facultate.objects.all()
+        obj = {'lucarari': query, 'facs': facs}
+        return obj
+
+
+class LucreareView(FormView):
+    template_name = 'register_lucrare.html'
+    form_class = LucrareForm
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Lucrare inregistrata cu succes.')
+        return redirect('professor_app:register_lucrare')

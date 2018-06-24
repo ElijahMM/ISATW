@@ -2,47 +2,10 @@
 
 {% block content %}
 
-    <h3 class="title_text">Liste Profesori</h3>
+    <h3 class="title_text">Liste Lucarari</h3>
 
     <div class="content">
         <div>
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-sm-2">
-                    <label>Facultate</label>
-                    <select id="facs" name="nfacts">
-                        <option value="">Afiseaza Toate</option>
-                        {% for facultate in object_list.facs %}
-                            <option value="{{ facultate.id }}">{{ facultate.name }}</option>
-                        {% endfor %}
-                    </select>
-
-                </div>
-
-                <div class="col-sm-2">
-                    <button onclick="myFunction()">Aplica filtre
-                    </button>
-                </div>
-
-                <div class="col-sm-2">
-                    <button onclick="location.href='{% url 'student_app:view_students' %}';">Reseteaza filtre</button>
-                </div>
-
-                <!--Grid column-->
-                <div class="col-sm-4">
-
-                    <form class="form-inline">
-                        <input class="form-control" type="text" placeholder="Search" style="max-width: 150px;">
-                        <button>Cauta</button>
-                    </form>
-
-                </div>
-                <!--Grid column-->
-
-            </div>
-
-
             <br>
             <br>
             <div>
@@ -54,10 +17,10 @@
                             <!--Table head-->
                             <thead>
                             <tr>
-                                <th class="th-lg"><strong>Cnp</strong></th>
-                                <th class="th-lg"><strong>Nume</strong></th>
-                                <th class="th-lg"><strong>Prenume</strong></th>
-                                <th class="th-lg"><strong>Facultate</strong></th>
+                                <th class="th-lg"><strong>Titlu lucrare</strong></th>
+                                <th class="th-lg"><strong>Tip Lucrare</strong></th>
+                                <th class="th-lg"><strong>Student </strong></th>
+                                <th class="th-lg"><strong>Profesor</strong></th>
 
                                 <th></th>
 
@@ -68,12 +31,12 @@
 
                             <!--Table body-->
                             <tbody>
-                            {% for professor in object_list.professors %}
+                            {% for lucarare in object_list.lucarari %}
                                 <tr>
-                                    <th>{{ professor.cnp }}</th>
-                                    <th>{{ professor.last_name }}</th>
-                                    <th>{{ professor.first_name }}</th>
-                                    <th>{{ professor.faculty }}</th>
+                                    <th>{{ lucarare.titluLucrare }}</th>
+                                    <th>{{ lucarare.get_tipLucrare_display }}</th>
+                                    <th>{{ lucarare.student.first_name }} {{ lucarare.student.last_name }}</th>
+                                    <th>{{ lucarare.profesor.first_name }} {{ lucarare.profesor.last_name }}</th>
                                     <th>
                                         <button>Edit</button>
                                     </th>

@@ -5,19 +5,17 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
+from StudentApp.models import Student, Facultate
+
 GENDER_CHOSE = (
     ("M", "Masculin"),
     ("F", "Feminin")
 )
 
-
-class Facultate(models.Model):
-    name = models.CharField(max_length=254, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    pass
+LUCRARE_CHOSE = (
+    ("L", "Licenta"),
+    ("D", "Disertatie")
+)
 
 
 class Professor(models.Model):
@@ -29,7 +27,7 @@ class Professor(models.Model):
     email = models.EmailField(unique=True, blank=True)
     create_at = models.DateTimeField(_('create_at'), default=timezone.now)
     update_at = models.DateTimeField(_('update_at'), default=timezone.now)
-    faculty = models.OneToOneField(Facultate, on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Facultate, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return self.email
@@ -39,3 +37,21 @@ class Professor(models.Model):
 
     def get_short_name(self):
         return self.first_name
+
+
+class Lucrare(models.Model):
+    titluLucrare = models.CharField(max_length=254, blank=True)
+    tipLucrare = models.CharField(max_length=1, choices=LUCRARE_CHOSE, blank=True)
+    create_at = models.DateTimeField(_('create_at'), default=timezone.now)
+    update_at = models.DateTimeField(_('update_at'), default=timezone.now)
+    student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    profesor = models.ForeignKey(Professor, on_delete=models.CASCADE, default=0)
+
+    def __str__(self):
+        return self.titluLucrare
+
+    def get_full_name(self):
+        return self.titluLucrare
+
+    def get_short_name(self):
+        return self.titluLucrare

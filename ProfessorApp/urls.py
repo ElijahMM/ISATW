@@ -1,12 +1,15 @@
 from django.conf.urls import url
 
-
 from ProfessorApp.views import (
     RegisterProfessor,
-    ViewProfessors
+    ViewProfessors,
+    LucreareView,
+    ViewLucrari
 )
 
 urlpatterns = [
     url(r'^registerProfessor', RegisterProfessor.as_view(), name='register_professor'),
-    url(r'^viewProfessors', ViewProfessors.as_view(), name='view_professors')
+    url(r'^viewProfessors', ViewProfessors.as_view(), name='view_professors'),
+    url(r'^registerLucrare', LucreareView.as_view(), name='register_lucrare'),
+    url(r'^viewLucrare', ViewLucrari.as_view(), name='view_lucrare')
 ]

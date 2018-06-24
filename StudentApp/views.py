@@ -20,7 +20,7 @@ class RegisterStudent(FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'Successfully enrolled.')
+        messages.success(self.request, 'Student inregistrat cu succes.')
         return redirect('register_professor:home1')
 
 
