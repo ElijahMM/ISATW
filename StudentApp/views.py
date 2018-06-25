@@ -21,7 +21,7 @@ class RegisterStudent(FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, 'Student inregistrat cu succes.')
-        return redirect('register_professor:home1')
+        return redirect('student_app:register_student')
 
 
 class ViewStudents(LoginRequiredMixin, ListView):

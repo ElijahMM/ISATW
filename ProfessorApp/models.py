@@ -55,3 +55,10 @@ class Lucrare(models.Model):
 
     def get_short_name(self):
         return self.titluLucrare
+
+
+class Document(models.Model):
+    descriere = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    create_at = models.DateTimeField(_('create_at'), default=timezone.now)
+    update_at = models.DateTimeField(_('update_at'), default=timezone.now)

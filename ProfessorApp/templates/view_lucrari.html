@@ -39,6 +39,11 @@
                                     <th>{{ lucarare.profesor.first_name }} {{ lucarare.profesor.last_name }}</th>
                                     <th>
                                         <button>Edit</button>
+                                        <button>
+                                            <a href="{% url  'professor_app:file_upload' %}">
+                                                Fisiere
+                                            </a>
+                                        </button>
                                     </th>
                                 </tr>
                             {% endfor %}

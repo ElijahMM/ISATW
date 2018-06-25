@@ -2,11 +2,11 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, FormView, ListView
 from django.contrib import messages
-from ProfessorApp.forms import ProfessorForm, LucrareForm
-from ProfessorApp.models import Professor, Lucrare
+from ProfessorApp.forms import ProfessorForm, LucrareForm, DocumentForm
+from ProfessorApp.models import Professor, Lucrare, Document
 from StudentApp.models import Facultate
 
 
@@ -39,6 +39,25 @@ class ViewLucrari(ListView):
         query = Lucrare.objects.all()
         facs = Facultate.objects.all()
         obj = {'lucarari': query, 'facs': facs}
+        return obj
+
+
+class FileUpload(FormView, ListView):
+    template_name = "file_upload.html"
+    form_class = DocumentForm
+    model = Document
+
+    def form_valid(self, form):
+        if self.request.method == 'POST':
+            form = DocumentForm(self.request.POST, self.request.FILES)
+            if form.is_valid():
+                form.save()
+
+        return redirect('professor_app:file_upload')
+
+    def get_queryset(self):
+        query = Document.objects.all()
+        obj = {'documents': query}
         return obj
 
 

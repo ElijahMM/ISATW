@@ -1,6 +1,6 @@
 from django import forms
 
-from ProfessorApp.models import Professor, Lucrare
+from ProfessorApp.models import Professor, Lucrare, Document
 from StudentApp.models import Student, Facultate
 
 
@@ -28,3 +28,10 @@ class LucrareForm(forms.ModelForm):
         super(LucrareForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = '__all__'
+        exclude = ['create_at', 'update_at']
