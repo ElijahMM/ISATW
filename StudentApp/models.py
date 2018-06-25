@@ -40,8 +40,7 @@ class Student(models.Model):
     email = models.EmailField(unique=True, blank=True)
     create_at = models.DateTimeField(_('create_at'), default=timezone.now)
     update_at = models.DateTimeField(_('update_at'), default=timezone.now)
-    faculty = models.OneToOneField(Facultate, on_delete=models.CASCADE)
-    specializations = models.OneToOneField(Specializare, on_delete=models.CASCADE)
+    specializations = models.ForeignKey(Specializare, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return self.email
