@@ -1,9 +1,21 @@
 {% extends "base_logedin_staff.html" %}
 
 {% block content %}
-<center>{% if user.is_authenticated %}
-    <p>Welcome home, {{ user.get_username }}. Thanks for logging in.  Last login: {{ user.last_login }}</p>
-{% else %}
-    <p>Welcome home, new user. Please log in.</p>
-{% endif %}</center>
+
+    <div class="content-agileits">
+        <h1 class="title">Bun venit</h1><br>
+        {% load static %}
+
+        <img src="{% static "images/usv_logo.png" %}" alt="My image" height="250" width="800"/>
+
+
+        <div class="center">
+            {% if user.is_authenticated %}
+                <p>Welcome home, {{ user.get_full_name }}. Thanks for logging in. Last login: {{ user.last_login }}</p>
+            {% else %}
+                <p>Welcome home, new user. Please log in.</p>
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}

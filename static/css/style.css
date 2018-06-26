@@ -235,8 +235,8 @@ h1.title {
     font-size: 2.5em;
     letter-spacing: 2px;
     padding: 0.5em 0;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.4);
+    color: #41498B;
+    background: #5AA1D8;
     text-transform: uppercase;
 }
 
@@ -272,7 +272,7 @@ form-group.field {
 
 .content-agileits {
     width: 50%;
-    margin: 3em auto;
+    margin: 10em auto;
 
 }
 
@@ -295,6 +295,7 @@ form-group.field {
     display: inline-block;
     padding: 4em;
     background: #fff;
+
 }
 
 input#firstname,
