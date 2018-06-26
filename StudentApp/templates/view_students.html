@@ -9,7 +9,7 @@
             <!--Grid row-->
             <div class="row">
                 <!--Grid column-->
-                <div class="col-sm-2">
+                <div class="dropdown col-sm-2">
                     <label>Facultate</label>
                     <select id="facs" name="nfacts">
                         <option value="">Afiseaza Toate</option>
@@ -21,7 +21,7 @@
                 </div>
 
 
-                <div class="col-sm-2">
+                <div class="dropdown col-sm-2">
                     <label>Specializare</label>
                     <!--Blue select-->
                     <select id="specs" name="sfacts">
@@ -89,11 +89,21 @@
                                     <th>{{ student.nr_matricol }}</th>
                                     <th>{{ student.last_name }}</th>
                                     <th>{{ student.first_name }}</th>
-                                    <th>{{ student.faculty }}</th>
+                                    <th>{{ student.specializations.facultate }}</th>
                                     <th>{{ student.specializations }}</th>
-                                    <th>
-                                        <button>Edit</button>
                                     </th>
+                                    <th>
+                                        <button class="btn btn-sm" style="color: black;"
+                                                onclick="window.location.href = '{% url 'student_app:edit_student' student.nr_matricol %}';">
+                                            Edit
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-sm btn-danger"
+                                                onclick="window.location.href = '{% url 'student_app:delete_student' student.nr_matricol %}';">
+                                            Delete
+                                        </button>
+
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -137,9 +147,7 @@
     <script>
         // On mouse-over, execute myFunction
         function myFunction() {
-            var bar = 2;
-            var url = '{% url 'student_app:view_students_s' 2  %}';
-            location.href = url;
+            location.href = '';
 
         }
     </script>

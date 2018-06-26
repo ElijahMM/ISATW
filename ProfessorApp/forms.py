@@ -35,3 +35,15 @@ class DocumentForm(forms.ModelForm):
         model = Document
         fields = '__all__'
         exclude = ['create_at', 'update_at']
+
+class ProfesorFormUpdate(forms.ModelForm):
+    class Meta:
+        model = Professor
+        fields = '__all__'
+        exclude = ['create_at', 'update_at', 'cnp']
+
+    def __init__(self, *args, **kwargs):
+        super(ProfesorFormUpdate, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+>>>>>>> 3578a04bb36aa43b9ac3c244b5435d7302ed27ea

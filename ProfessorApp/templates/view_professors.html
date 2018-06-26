@@ -74,9 +74,17 @@
                                     <th>{{ professor.last_name }}</th>
                                     <th>{{ professor.first_name }}</th>
                                     <th>{{ professor.faculty }}</th>
-                                    <th>
-                                        <button>Edit</button>
+                                   <th>
+                                        <button class="btn btn-sm" style="color: black;"
+                                                onclick="window.location.href = '{% url 'professor_app:edit_professor' professor.cnp %}';">
+                                            Edit
+                                        </button>
                                     </th>
+                                    <th>
+                                        <button class="btn btn-sm btn-danger"
+                                                onclick="window.location.href = '{% url 'professor_app:delete_professor' professor.cnp %}';">
+                                            Delete
+                                        </button>
                                 </tr>
                             {% endfor %}
                             </tbody>
