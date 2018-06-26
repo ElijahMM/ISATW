@@ -2,21 +2,15 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-<<<<<<< HEAD
-from django.shortcuts import redirect, render
-from django.views.generic import TemplateView, FormView, ListView
-from django.contrib import messages
-from ProfessorApp.forms import ProfessorForm, LucrareForm, DocumentForm
-from ProfessorApp.models import Professor, Lucrare, Document
-=======
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView, FormView, ListView, UpdateView, DeleteView
 from django.contrib import messages
-from ProfessorApp.forms import ProfessorForm, LucrareForm, ProfesorFormUpdate
-from ProfessorApp.models import Professor, Lucrare
->>>>>>> 3578a04bb36aa43b9ac3c244b5435d7302ed27ea
-from StudentApp.models import Facultate
+from ProfessorApp.forms import ProfessorForm, LucrareForm, ProfesorFormUpdate, DocumentForm
+from ProfessorApp.models import Professor, Lucrare, Document
+from StudentApp.models import Facultate, Student
 
 
 class RegisterProfessor(FormView):
@@ -68,25 +62,6 @@ class ViewLucrari(ListView):
         return obj
 
 
-class FileUpload(FormView, ListView):
-    template_name = "file_upload.html"
-    form_class = DocumentForm
-    model = Document
-
-    def form_valid(self, form):
-        if self.request.method == 'POST':
-            form = DocumentForm(self.request.POST, self.request.FILES)
-            if form.is_valid():
-                form.save()
-
-        return redirect('professor_app:file_upload')
-
-    def get_queryset(self):
-        query = Document.objects.all()
-        obj = {'documents': query}
-        return obj
-
-
 class LucreareView(FormView):
     template_name = 'register_lucrare.html'
     form_class = LucrareForm
@@ -95,3 +70,33 @@ class LucreareView(FormView):
         form.save()
         messages.success(self.request, 'Lucrare inregistrata cu succes.')
         return redirect('professor_app:register_lucrare')
+
+
+class FileUpload(FormView, ListView, View):
+    template_name = "file_upload.html"
+    form_class = DocumentForm
+    model = Document
+
+    def form_valid(self, form):
+        if self.request.method == 'POST':
+            form = DocumentForm(self.request.POST, self.request.FILES)
+            if form.is_valid():
+                document = form.save(commit=False)
+                document.student = Student.objects.get(nr_matricol=self.kwargs['student_id'])
+                document.save()
+
+                return redirect(self.request.path_info)
+
+    def get_queryset(self):
+        query = Document.objects.filter(student_id=self.kwargs['student_id'])
+        obj = {'documents': query}
+        return obj
+
+
+def pdf_view(request, *args, **kwargs):
+    document = Document.objects.get(id=kwargs['document_id'])
+
+    with open(document.document.url, 'r') as pdf:
+        response = HttpResponse(pdf.read(), content_type='application/pdf')
+        response['Content-Disposition'] = 'inline;filename=some_file.pdf'
+        return response

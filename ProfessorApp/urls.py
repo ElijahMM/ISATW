@@ -7,7 +7,8 @@ from ProfessorApp.views import (
     ViewLucrari,
     FileUpload,
     ProfesorUpdate,
-    DeleteProfesor
+    DeleteProfesor,
+    pdf_view
 )
 
 urlpatterns = [
@@ -17,5 +18,6 @@ urlpatterns = [
     url(r'^viewProfessors', ViewProfessors.as_view(), name='view_professors'),
     url(r'^registerLucrare', LucreareView.as_view(), name='register_lucrare'),
     url(r'^viewLucrare', ViewLucrari.as_view(), name='view_lucrare'),
-    url(r'^fileUpload', FileUpload.as_view(), name='file_upload')
+    url(r'^fileUpload/(?P<student_id>\d+)/$', FileUpload.as_view(), name='file_upload'),
+    url(r'^my_page/(?P<document_id>\d+)/$', pdf_view, name="pdf_view")
 ]

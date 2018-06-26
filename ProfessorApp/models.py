@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.validators import FileExtensionValidator
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
+from ProfessorApp.validators import validate_file_extension
 from StudentApp.models import Student, Facultate
 
 GENDER_CHOSE = (
@@ -59,6 +61,7 @@ class Lucrare(models.Model):
 
 class Document(models.Model):
     descriere = models.CharField(max_length=255, blank=True)
-    document = models.FileField(upload_to='documents/')
+    document = models.FileField(upload_to='documents/', validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
     create_at = models.DateTimeField(_('create_at'), default=timezone.now)
     update_at = models.DateTimeField(_('update_at'), default=timezone.now)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, default=0)

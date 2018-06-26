@@ -32,6 +32,9 @@
                                 <tr>
                                     <th>{{ document.descriere}}</th>
                                     <th>{{ document.document }}</th>
+                                    <th>
+                                        <button><a href="{% url 'professor_app:pdf_view' document.id %}">Vezi Fisier</a></button>
+                                    </th>
                                 </tr>
                             {% endfor %}
                             </tbody>
