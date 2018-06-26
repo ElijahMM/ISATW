@@ -1,0 +1,70 @@
+{% extends "base_logedin_staff.html" %}
+
+{% block content %}
+    <div class="content-agileits">
+        <h1 class="title">Inregistreaza un nou progres</h1>
+        <div class="center">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <br>
+                <input type="submit" class="btn btn-primary pull-right" value="Submit"/>
+            </form>
+            <br><br>
+
+            <h1 class="page-header">Istoric status</h1>
+
+            <br><br>
+            <div class="table-wrapper">
+                <!--Table-->
+                <table class="table">
+
+                    <!--Table head-->
+                    <thead>
+                    <tr>
+                        <th class="th-lg"><strong>Data</strong></th>
+                        <th class="th-lg"><strong>Descriere</strong></th>
+                    </tr>
+
+                    </thead>
+                    <!--Table head-->
+
+                    <!--Table body-->
+                    <tbody>
+                    {% for stats in object_list.status %}
+                        <tr>
+                            <th>{{ stats.create_at }}</th>
+                            <th>{{ stats.description |truncatechars:12 }}</th>
+                            <th>
+                                <button class="btn btn-primary btn-sm"
+                                        onclick="window.location.href ='{% url 'professor_app:view_status'  stats.id %}'"
+                                >Vezi complet
+                                </button>
+                            </th>
+                            <th>
+                                <button class="btn btn-danger btn-sm"
+                                        onclick="window.location.href ='{% url 'professor_app:delete_status'  stats.id %}'">
+                                    Sterge
+                                </button>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <!--Table body-->
+                </table>
+                <!--Table-->
+                <button class="btn btn-sm" style="color: #000;"
+                        onclick="window.location.href ='{% url 'professor_app:view_lucrare' %}'">Inapoi
+                </button>
+            </div>
+        </div>
+
+{% endblock %}

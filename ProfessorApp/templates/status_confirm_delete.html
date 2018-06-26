@@ -1,0 +1,32 @@
+{% extends "base_logedin_staff.html" %}
+
+{% block content %}
+
+    <div class="content-agileits">
+        <h1 class="title">Stergere profesor </h1>
+        <div class="center">
+            <form class="center" style="text-align: center" method="post">{% csrf_token %}
+                <h1>Sunteti sigur ca doriti sa stergeti statusul "{{ object }}"?</h1>
+                <br>
+                <div class=>
+                    <input style="display: block;margin-right: auto;margin-left: auto;" type="submit" value="Confirm"
+                           class="btn btn-danger"/>
+                    <br>
+                </div>
+            </form>
+            <button class="btn btn-sm" style="color: #000;"
+                    onclick="window.history.back()">Inapoi
+            </button>
+        </div>
+    </div>
+
+    {% load static %}
+    <!-- js -->
+    <script src="{% static  'js/jquery-2.1.4.min.js ' %}"></script>
+    <!-- //js -->
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/validator.min.js' %}"></script>
+
+    <!-- /js files -->
+{% endblock %}

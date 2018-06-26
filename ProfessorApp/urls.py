@@ -5,8 +5,13 @@ from ProfessorApp.views import (
     ViewProfessors,
     LucreareView,
     ViewLucrari,
+    FileUpload,
     ProfesorUpdate,
-    DeleteProfesor
+    DeleteProfesor,
+    pdf_view,
+    UpdateStatusView,
+    StatusView,
+    DeleteStatus
 )
 
 urlpatterns = [
@@ -15,5 +20,10 @@ urlpatterns = [
     url(r'^professor/delete/(?P<pk>[0-9]+)', DeleteProfesor.as_view(), name='delete_professor'),
     url(r'^viewProfessors', ViewProfessors.as_view(), name='view_professors'),
     url(r'^registerLucrare', LucreareView.as_view(), name='register_lucrare'),
-    url(r'^viewLucrare', ViewLucrari.as_view(), name='view_lucrare')
+    url(r'^viewLucrare', ViewLucrari.as_view(), name='view_lucrare'),
+    url(r'^fileUpload/(?P<student_id>\d+)/$', FileUpload.as_view(), name='file_upload'),
+    url(r'^student/lucrare/view_pdf/(?P<document_id>\d+)/$', pdf_view, name="pdf_view"),
+    url(r'^student/lucrare/update_status/(?P<student_id>\d+)/$', UpdateStatusView.as_view(), name="status_update"),
+    url(r'^student/lucrare/status/view/(?P<pk>\d+)/$', StatusView.as_view(), name="view_status"),
+    url(r'^student/lucrare/status/delete/(?P<pk>[0-9]+)', DeleteStatus.as_view(), name="delete_status")
 ]

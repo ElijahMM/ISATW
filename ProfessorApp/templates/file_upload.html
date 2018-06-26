@@ -1,0 +1,57 @@
+{% extends 'base_logedin_staff.html' %}
+
+{% block content %}
+    <div class="content-agileits">
+        <h1 class="title">Fisiere</h1>
+        <div class="center">
+            <form class="center" style="text-align: center" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br>
+                <button class="btn btn-primary" type="submit">Upload</button>
+            </form>
+            <br><br>
+
+            <h1 class="page-header">Istoric fisier</h1>
+
+            <br><br>
+            <div class="table-wrapper">
+                <!--Table-->
+                <table class="table">
+
+                    <!--Table head-->
+                    <thead>
+                    <tr>
+                        <th class="th-lg"><strong>Descriere</strong></th>
+                        <th class="th-lg"><strong>Document</strong></th>
+                    </tr>
+
+                    </thead>
+                    <!--Table head-->
+
+                    <!--Table body-->
+                    <tbody>
+                    {% for document in object_list.documents %}
+                        <tr>
+                            <th>{{ document.descriere }}</th>
+                            <th>{{ document.document }}</th>
+                            <th>
+                                <button class="btn btn-sm" style="color: black;"
+                                        onclick="window.location.href ='{% url 'professor_app:pdf_view' document.id %}'">
+                                    Vezi Fisier
+                                </button>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <!--Table body-->
+                </table>
+                <!--Table-->
+            </div>
+
+            <button class="btn btn-sm" style="color: #000;"
+                    onclick="window.location.href ='{% url 'professor_app:view_lucrare' %}'">Inapoi
+            </button>
+        </div>
+    </div>
+{% endblock %}

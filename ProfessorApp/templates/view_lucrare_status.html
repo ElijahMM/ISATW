@@ -1,0 +1,20 @@
+{% extends "base_logedin_staff.html" %}
+
+{% block content %}
+    <div class="content-agileits">
+        <h1 class="title">Visualizare status</h1>
+        <div class="center">
+            La data de {{ object.create_at }} s-a inregistrat statusul pentru
+            studentul {{ object.student.first_name }} {{ object.student.last_name }}
+            <br>
+            <br>
+            <div class="col-" style="border-style: solid;  border-width: 1px; padding: 10px; height: 200px">
+                <p>{{ object.description }}</p>
+            </div>
+        </div>
+
+        <button class="btn btn-sm" style="color: #000;"
+                onclick="window.history.back()">Inapoi
+        </button>
+    </div>
+{% endblock %}

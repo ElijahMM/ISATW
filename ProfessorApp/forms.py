@@ -1,6 +1,6 @@
 from django import forms
 
-from ProfessorApp.models import Professor, Lucrare
+from ProfessorApp.models import Professor, Lucrare, Document, LucrareStatus
 from StudentApp.models import Student, Facultate
 
 
@@ -29,6 +29,28 @@ class LucrareForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
+class StatusForm(forms.ModelForm):
+    class Meta:
+        model = LucrareStatus
+        fields = '__all__'
+        exclude = ['create_at', 'update_at', 'student']
+
+    def __init__(self, *args, **kwargs):
+        super(StatusForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = '__all__'
+        exclude = ['create_at', 'update_at', 'student']
+
+    def __init__(self, *args, **kwargs):
+        super(DocumentForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
 
 class ProfesorFormUpdate(forms.ModelForm):
     class Meta:
@@ -40,3 +62,5 @@ class ProfesorFormUpdate(forms.ModelForm):
         super(ProfesorFormUpdate, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h3 class="title_text">Liste Lucarari</h3>
+    <h3 class="title_text ">Liste Lucrari</h3>
 
     <div class="content">
         <div>
@@ -38,7 +38,16 @@
                                     <th>{{ lucarare.student.first_name }} {{ lucarare.student.last_name }}</th>
                                     <th>{{ lucarare.profesor.first_name }} {{ lucarare.profesor.last_name }}</th>
                                     <th>
-                                        <button>Edit</button>
+                                        <button class="btn btn-sm" style="color: black;"
+                                                onclick="window.location.href ='{% url  'professor_app:status_update' lucarare.student.nr_matricol %}'">
+                                            Integistreaza status
+
+                                        </button>
+
+                                        <button class="btn btn-sm" style="color: black;"
+                                                onclick="window.location.href ='{% url 'professor_app:file_upload' lucarare.student.nr_matricol %}'">
+                                            Fisiere
+                                        </button>
                                     </th>
                                 </tr>
                             {% endfor %}
