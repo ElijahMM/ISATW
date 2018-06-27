@@ -2,19 +2,21 @@
 
 {% block content %}
 
-    <h3 class="title_text">Liste Studenti</h3>
+<h3 class="title_text">Liste Studenti</h3>
 
-    <div class="content">
-        <div>
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
+<div class="content">
+    <div>
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <form class="form-inline" type="get" action="{% url 'student_app:view_students' %}" style="margin: 0 ">
+
                 <div class="dropdown col-sm-2">
                     <label>Facultate</label>
                     <select id="facs" name="nfacts">
                         <option value="">Afiseaza Toate</option>
                         {% for facultate in object_list.facs %}
-                            <option value="{{ facultate.id }}">{{ facultate.name }}</option>
+                        <option value="{{ facultate.id }}">{{ facultate.name }}</option>
                         {% endfor %}
                     </select>
 
@@ -27,100 +29,120 @@
                     <select id="specs" name="sfacts">
                         <option value="">Afiseaza Toate</option>
                         {% for specs in object_list.specs %}
-                            <option value="{{ specs.id }}">{{ specs.name }}</option>
+                        <option value="{{ specs.id }}">{{ specs.name }}</option>
                         {% endfor %}
                     </select>
                     <!--/Blue select-->
 
                 </div>
-
-
                 <div class="col-sm-2">
-                    <button onclick="myFunction()">Aplica filtre
-                    </button>
+                    <button id="search_submit" type="submit">Aplica filtre</button>
                 </div>
-
-                <div class="col-sm-2">
-                    <button onclick="location.href='{% url 'student_app:view_students' %}';">Reseteaza filtre</button>
-                </div>
-
-                <!--Grid column-->
-                <div class="col-sm-4">
-
-                    <form class="form-inline">
-                        <input class="form-control" type="text" placeholder="Search" style="max-width: 150px;">
-                        <button>Cauta</button>
-                    </form>
-
-                </div>
-                <!--Grid column-->
-
+            </form>
+            <div class="col-sm-2">
+                <button onclick="location.href='{% url 'student_app:view_students' %}';">Reseteaza filtre</button>
             </div>
 
+            <div class="col-sm-4">
+                <form class="form-inline" type="get" action="{% url 'student_app:view_students' %}" style="margin: 0 ">
+                    <center><input id="search_box" type="text" name="search_box"
+                                   class="glyphicon glyphicon-search form-control" placeholder=" Search...">
+                        <button id="search_submits" class="glyphicon glyphicon-search" type="submit"></button>
+                    </center>
+                </form>
+            </div>
 
-            <br>
-            <br>
+        </div>
+
+
+        <br>
+        <br>
+        <div>
             <div>
-                <div>
-                    <div class="table-wrapper">
-                        <!--Table-->
-                        <table class="table">
+                <div class="table-wrapper">
+                    <!--Table-->
+                    <table class="table">
 
-                            <!--Table head-->
-                            <thead>
-                            <tr>
-                                <th class="th-lg"><strong>Nr matricol</strong></th>
-                                <th class="th-lg"><strong>Nume</strong></th>
-                                <th class="th-lg"><strong>Prenume</strong></th>
-                                <th class="th-lg"><strong>Facultate</strong></th>
-                                <th class="th-lg"><strong>Specializare</strong></th>
+                        <!--Table head-->
+                        <thead>
+                        <tr>
+                            <th class="th-lg"><strong>Nr matricol</strong></th>
+                            <th class="th-lg"><strong>Nume</strong></th>
+                            <th class="th-lg"><strong>Prenume</strong></th>
+                            <th class="th-lg"><strong>Facultate</strong></th>
+                            <th class="th-lg"><strong>Specializare</strong></th>
 
-                                <th></th>
+                            <th></th>
 
-                            </tr>
+                        </tr>
 
-                            </thead>
-                            <!--Table head-->
+                        </thead>
+                        <!--Table head-->
 
-                            <!--Table body-->
-                            <tbody>
-                            {% for student in object_list.students %}
-                                <tr>
-                                    <th>{{ student.nr_matricol }}</th>
-                                    <th>{{ student.last_name }}</th>
-                                    <th>{{ student.first_name }}</th>
-                                    <th>{{ student.specializations.facultate }}</th>
-                                    <th>{{ student.specializations }}</th>
-                                    </th>
-                                    <th>
-                                        <button class="btn btn-sm" style="color: black;"
-                                                onclick="window.location.href = '{% url 'student_app:edit_student' student.nr_matricol %}';">
-                                            Edit
+                        <!--Table body-->
+                        <tbody>
+                        {% for student in object_list.students %}
+                        <tr>
+                            <th>{{ student.nr_matricol }}</th>
+                            <th>{{ student.last_name }}</th>
+                            <th>{{ student.first_name }}</th>
+                            <th>{{ student.specializations.facultate }}</th>
+                            <th>{{ student.specializations }}</th>
+                            </th>
+                            <th>
+                                <button class="btn btn-sm" style="color: black;"
+                                        onclick="window.location.href = '{% url 'student_app:edit_student' student.nr_matricol %}';">
+                                    Edit
+                                </button>
+                            </th>
+                            <th>
+                                <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                        data-target="#myModal{{student.nr_matricol}}">
+                                    Delete
+                                </button>
+
+                        </tr>
+                        <!--// modal-->
+                        <div class="modal fade" id="myModal{{student.nr_matricol}}" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;
                                         </button>
-                                    </th>
-                                    <th>
-                                        <button class="btn btn-sm btn-danger"
-                                                onclick="window.location.href = '{% url 'student_app:delete_student' student.nr_matricol %}';">
-                                            Delete
+                                        <h4 class="modal-title">Delete</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Esti sigur ca doresti sa-l stergi?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'student_app:delete_student' student.nr_matricol %}">
+                                            <button type="button" class="btn btn-primary">Sunt sigur
+                                            </button>
+                                        </a>
+                                        <button type="button" class="btn btn-info" data-dismiss="modal">
+                                            Inchide
                                         </button>
-
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                            <!--Table body-->
-                        </table>
-                        <!--Table-->
-                    </div>
-
-                    <hr class="my-0">
-
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
                 </div>
+
+                <hr class="my-0">
+
+
             </div>
         </div>
     </div>
+</div>
 
-    <style media="screen" type="text/css">
+<style media="screen" type="text/css">
         .content {
             position: absolute;
             top: 0;
@@ -143,13 +165,15 @@
             margin-top: 150px;
             right: 0;
         }
-    </style>
-    <script>
+
+</style>
+<script>
         // On mouse-over, execute myFunction
         function myFunction() {
             location.href = '';
 
         }
-    </script>
+
+</script>
 
 {% endblock %}

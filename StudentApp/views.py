@@ -3,9 +3,11 @@ from __future__ import unicode_literals
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.db.models import Q
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import FormView, ListView, UpdateView, DeleteView
+
 from StudentApp.forms import StudentForm, StudentFormUpdate
 from StudentApp.models import Facultate
 from StudentApp.models import Specializare
@@ -48,12 +50,20 @@ class ViewStudents(LoginRequiredMixin, ListView):
     model = Student
 
     def get_queryset(self):
-        print("ViewStudents")
+        search_query = self.request.GET.get('search_box', None)
+        facult_filter = self.request.GET.get('nfacts', None)
+        spec_filter = self.request.GET.get('sfacts', None)
         query = Student.objects.all()
         facs = Facultate.objects.all()
         specs = Specializare.objects.all()
-        obj = {'students': query, 'facs': facs, 'specs': specs}
-        return obj
+        if facult_filter:
+            query = query.filter(Q(faculties_id=facult_filter)).distinct()
+        if spec_filter:
+            query = query.filter(Q(specializations_id=spec_filter)).distinct()
+        if search_query:
+            query = query.filter(Q(first_name__icontains=search_query) | Q(last_name__icontains=search_query) | Q(
+                nr_matricol__icontains=search_query)).distinct()
+        return {'students': query, 'facs': facs, 'specs': specs}
 
 
 class ViewStudentsQueryFacuty(ListView):
@@ -94,3 +104,10 @@ class ViewStudentsQueryAll(ListView):
         specs = Specializare.objects.all()
         obj = {'students': query, 'facs': facs, 'specs': specs}
         return obj
+
+
+def delete_student(request, pk):
+    student = get_object_or_404(Student, nr_matricol=pk)
+    if student:
+        student.delete()
+    return redirect('student_app:view_students')

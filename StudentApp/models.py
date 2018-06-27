@@ -41,6 +41,7 @@ class Student(models.Model):
     create_at = models.DateTimeField(_('create_at'), default=timezone.now)
     update_at = models.DateTimeField(_('update_at'), default=timezone.now)
     specializations = models.ForeignKey(Specializare, on_delete=models.CASCADE, default=0)
+    faculties = models.ForeignKey(Facultate, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return self.email

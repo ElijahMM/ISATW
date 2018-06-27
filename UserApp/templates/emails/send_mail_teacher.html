@@ -1,0 +1,15 @@
+{% autoescape off %}
+
+Buna ziua, {{first_name}} {{last_name}}!
+
+
+Poti folosi urmatoarele credentiale pentru a te autentifica:
+email : {{email}}
+password : {{password}}
+
+Puteti sa va autentificati aici:
+http://{{ domain }}{% url 'user_app:login' %}
+
+Multumim! O zi buna!
+
+{% endautoescape %}

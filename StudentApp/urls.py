@@ -7,14 +7,14 @@ from StudentApp.views import (
     ViewStudentsQueryScec,
     ViewStudentsQueryAll,
     StudentUpdate,
-    DeleteStudent
+    delete_student
 
 )
 
 urlpatterns = [
     url(r'^registerStudent', RegisterStudent.as_view(), name='register_student'),
     url(r'^student/edit/(?P<pk>[0-9]+)', StudentUpdate.as_view(), name='edit_student'),
-    url(r'^student/delete/(?P<pk>[0-9]+)', DeleteStudent.as_view(), name='delete_student'),
+    url(r'^student/delete/(?P<pk>[0-9]+)', delete_student, name='delete_student'),
     url(r'^viewStudents', ViewStudents.as_view(), name='view_students'),
     url(r'^filter/facultate/(?P<facultate_id>\d+)/$', ViewStudentsQueryFacuty.as_view(), name='view_students_f'),
     url(r'^filter/specializare/(?P<specialization_id>\d+)/$', ViewStudentsQueryScec.as_view(), name='view_students_s'),

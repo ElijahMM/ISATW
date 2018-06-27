@@ -11,7 +11,7 @@ from ProfessorApp.views import (
     pdf_view,
     UpdateStatusView,
     StatusView,
-    DeleteStatus
+    delete_status
 )
 
 urlpatterns = [
@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^student/lucrare/view_pdf/(?P<document_id>\d+)/$', pdf_view, name="pdf_view"),
     url(r'^student/lucrare/update_status/(?P<student_id>\d+)/$', UpdateStatusView.as_view(), name="status_update"),
     url(r'^student/lucrare/status/view/(?P<pk>\d+)/$', StatusView.as_view(), name="view_status"),
-    url(r'^student/lucrare/status/delete/(?P<pk>[0-9]+)', DeleteStatus.as_view(), name="delete_status")
+    url(r'^student/lucrare/status/delete/(?P<pk>[0-9]+)', delete_status, name="delete_status"),
 ]

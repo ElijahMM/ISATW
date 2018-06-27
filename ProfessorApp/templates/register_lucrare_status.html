@@ -50,12 +50,36 @@
                                 </button>
                             </th>
                             <th>
-                                <button class="btn btn-danger btn-sm"
-                                        onclick="window.location.href ='{% url 'professor_app:delete_status'  stats.id %}'">
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal{{stats.pk}}">
                                     Sterge
                                 </button>
                             </th>
                         </tr>
+                    <!--// modal-->
+                                    <div class="modal fade" id="myModal{{stats.pk}}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                                    </button>
+                                                    <h4 class="modal-title">Delete</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Esti sigur ca doresti sa-l stergi?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'professor_app:delete_status' stats.pk %}">
+                                                        <button type="button" class="btn btn-primary">Sunt sigur
+                                                        </button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-info" data-dismiss="modal">
+                                                        Inchide
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                     {% endfor %}
                     </tbody>
                     <!--Table body-->
@@ -66,5 +90,5 @@
                 </button>
             </div>
         </div>
-
+    </div>
 {% endblock %}

@@ -12,7 +12,7 @@ from UserApp.models import User
 
 
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser', 'is_secretary')
+    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser', 'is_teacher')
 
 
 admin.site.register(User, UsersAdmin)
