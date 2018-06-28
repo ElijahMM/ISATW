@@ -38,12 +38,6 @@ class StudentUpdate(LoginRequiredMixin, UpdateView):
         return redirect('student_app:view_students')
 
 
-class DeleteStudent(LoginRequiredMixin, DeleteView):
-    model = Student
-    template_name = "student_confirm_delete.html"
-    success_url = reverse_lazy('student_app:view_students')
-
-
 class ViewStudents(LoginRequiredMixin, ListView):
     login_url = 'user_app:home'
     template_name = "view_students.html"

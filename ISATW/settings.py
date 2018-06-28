@@ -126,3 +126,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 AUTH_USER_MODEL = 'UserApp.User'
 LOGIN_REDIRECT_URL = 'user_app:home'
+
+try:
+    from .local_settings import *
+except:
+    pass

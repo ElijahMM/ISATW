@@ -7,6 +7,7 @@ from UserApp.models import User
 
 def register_new_teacher(teacher, domain):
     generate_password = BaseUserManager().make_random_password(length=6)
+    print(generate_password)
     new_user = User()
     new_user.first_name = teacher.cleaned_data['first_name']
     new_user.last_name = teacher.cleaned_data['last_name']
@@ -28,3 +29,11 @@ def register_new_teacher(teacher, domain):
     message = render_to_string('emails/send_mail_teacher.html', content)
     send_email = EmailMessage(subject, message, to=[to_email])
     send_email.send()
+
+
+def delete_user(email):
+    try:
+        user = User.objects.get(email=email)
+        user.delete()
+    except Exception:
+        pass

@@ -19,29 +19,62 @@
                 <!--Table-->
                 <table class="table">
 
-                    <!--Table head-->
-                    <thead>
-                    <tr>
-                        <th class="th-lg"><strong>Descriere</strong></th>
-                        <th class="th-lg"><strong>Document</strong></th>
-                    </tr>
+                    {% if object_list.documents %}
+                        <!--Table head-->
+                        <thead>
+                        <tr>
+                            <th class="th-lg"><strong>Descriere</strong></th>
+                            <th class="th-lg"><strong>Document</strong></th>
+                        </tr>
 
-                    </thead>
-                    <!--Table head-->
-
+                        </thead>
+                        <!--Table head-->
+                    {% endif %}
                     <!--Table body-->
                     <tbody>
                     {% for document in object_list.documents %}
                         <tr>
-                            <th>{{ document.descriere }}</th>
-                            <th>{{ document.document }}</th>
+                            <th>{{ document.descriere | truncatechars:10   }}</th>
+                            <th>{{ document.document |truncatechars:20  }}</th>
                             <th>
                                 <button class="btn btn-sm" style="color: black;"
                                         onclick="window.location.href ='{% url 'professor_app:pdf_view' document.id %}'">
                                     Vezi Fisier
                                 </button>
+
+                                <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                        data-target="#myModal{{ document.id }}">
+                                    Delete
+                                </button>
                             </th>
                         </tr>
+                        <!--// modal-->
+                        <div class="modal fade" id="myModal{{ document.id }}" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;
+                                        </button>
+                                        <h4 class="modal-title">Delete</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Esti sigur ca doresti sa-l stergi?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'professor_app:delete_document' document.id %}">
+                                            <button type="button" class="btn btn-primary">Sunt sigur
+                                            </button>
+                                        </a>
+                                        <button type="button" class="btn btn-info" data-dismiss="modal">
+                                            Inchide
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        Nu este incarcat nici un fisier
                     {% endfor %}
                     </tbody>
                     <!--Table body-->

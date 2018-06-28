@@ -13,20 +13,21 @@
                     <div class="table-wrapper">
                         <!--Table-->
                         <table class="table">
+                            {% if  object_list.lucarari %}
+                                <!--Table head-->
+                                <thead>
+                                <tr>
+                                    <th class="th-lg"><strong>Titlu lucrare</strong></th>
+                                    <th class="th-lg"><strong>Tip Lucrare</strong></th>
+                                    <th class="th-lg"><strong>Student </strong></th>
+                                    <th class="th-lg"><strong>Profesor</strong></th>
 
-                            <!--Table head-->
-                            <thead>
-                            <tr>
-                                <th class="th-lg"><strong>Titlu lucrare</strong></th>
-                                <th class="th-lg"><strong>Tip Lucrare</strong></th>
-                                <th class="th-lg"><strong>Student </strong></th>
-                                <th class="th-lg"><strong>Profesor</strong></th>
+                                    <th></th>
 
-                                <th></th>
+                                </tr>
 
-                            </tr>
-
-                            </thead>
+                                </thead>
+                            {% endif %}
                             <!--Table head-->
 
                             <!--Table body-->
@@ -48,8 +49,42 @@
                                                 onclick="window.location.href ='{% url 'professor_app:file_upload' lucarare.student.nr_matricol %}'">
                                             Fisiere
                                         </button>
+
+                                        {% if user.is_authenticated and not user.is_teacher %}
+                                            <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                                    data-target="#myModal{{ lucarare.id }}">
+                                                Delete
+                                            </button>
+                                        {% endif %}
                                     </th>
                                 </tr>
+                                <!--// modal-->
+                                <div class="modal fade" id="myModal{{ lucarare.id }}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;
+                                                </button>
+                                                <h4 class="modal-title">Delete</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Esti sigur ca doresti sa-l stergi?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'professor_app:delete_lucrare' lucarare.id %}">
+                                                    <button type="button" class="btn btn-primary">Sunt sigur
+                                                    </button>
+                                                </a>
+                                                <button type="button" class="btn btn-info" data-dismiss="modal">
+                                                    Inchide
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <li>Nu aveti nici o lucrare inregistrata</li>
                             {% endfor %}
                             </tbody>
                             <!--Table body-->
@@ -89,14 +124,6 @@
             right: 0;
         }
     </style>
-    <script>
-        // On mouse-over, execute myFunction
-        function myFunction() {
-            var bar = 2;
-            var url = '{% url 'student_app:view_students_s' 2  %}';
-            location.href = url;
 
-        }
-    </script>
 
 {% endblock %}

@@ -14,7 +14,7 @@ from django.views.generic import FormView, ListView, UpdateView, DeleteView, Det
 from ProfessorApp.forms import ProfessorForm, LucrareForm, ProfesorFormUpdate, DocumentForm, StatusForm
 from ProfessorApp.models import Professor, Lucrare, Document, LucrareStatus
 from StudentApp.models import Facultate, Student
-from UserApp.utils import register_new_teacher
+from UserApp.utils import register_new_teacher, delete_user
 
 
 class RegisterProfessor(FormView):
@@ -39,12 +39,6 @@ class ProfesorUpdate(LoginRequiredMixin, UpdateView):
         form.save()
         messages.success(self.request, 'Student modificat cu succes.')
         return redirect('professor_app:view_professors')
-
-
-class DeleteProfesor(LoginRequiredMixin, DeleteView):
-    model = Professor
-    template_name = "profesor_confirm_delete.html"
-    success_url = reverse_lazy('professor_app:view_professors')
 
 
 class ViewProfessors(LoginRequiredMixin, ListView):
@@ -144,8 +138,30 @@ def pdf_view(request, *args, **kwargs):
         return response
 
 
+def delete_profesor(request, pk):
+    profesor = get_object_or_404(Professor, cnp=pk)
+    if profesor:
+        delete_user(profesor.email)
+        profesor.delete()
+    return redirect('professor_app:view_professors')
+
+
 def delete_status(request, pk):
     status = get_object_or_404(LucrareStatus, id=pk)
     if status:
         status.delete()
     return redirect('professor_app:status_update', student_id=status.student.pk)
+
+
+def delete_document(request, pk):
+    document = get_object_or_404(Document, id=pk)
+    if document:
+        document.delete()
+    return redirect('professor_app:file_upload', student_id=document.student.pk)
+
+
+def delete_lucrare(request, pk):
+    lucrare = get_object_or_404(Lucrare, id=pk)
+    if lucrare:
+        lucrare.delete()
+    return redirect('professor_app:view_lucrare')
