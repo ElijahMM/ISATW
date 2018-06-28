@@ -125,14 +125,15 @@ class FileUpload(LoginRequiredMixin, FormView, ListView, View):
             if form.is_valid():
                 document = form.save(commit=False)
                 document.student = Student.objects.get(nr_matricol=self.kwargs['student_id'])
+                document.este_final = True if self.request.POST.get('fisier_final') else False
                 document.save()
 
                 return redirect(self.request.path_info)
 
     def get_queryset(self):
         query = Document.objects.filter(student_id=self.kwargs['student_id'])
-        obj = {'documents': query}
-        return obj
+        last_item = query.reverse().first().este_final
+        return {"documents": query, "last": last_item}
 
 
 def pdf_view(request, *args, **kwargs):
@@ -149,3 +150,9 @@ def delete_status(request, pk):
     if status:
         status.delete()
     return redirect('professor_app:status_update', student_id=status.student.pk)
+
+
+def delete_file(request, pk):
+    document = get_object_or_404(Document, id=pk)
+    document.delete()
+    return redirect('professor_app:file_upload', student_id=document.student.pk)

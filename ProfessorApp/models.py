@@ -62,6 +62,7 @@ class Lucrare(models.Model):
 class Document(models.Model):
     descriere = models.CharField(max_length=255, blank=True)
     document = models.FileField(upload_to='documents/', validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+    este_final = models.BooleanField(default=False)
     create_at = models.DateTimeField(_('create_at'), default=timezone.now)
     update_at = models.DateTimeField(_('update_at'), default=timezone.now)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, default=0)

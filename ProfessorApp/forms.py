@@ -29,6 +29,7 @@ class LucrareForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
+
 class StatusForm(forms.ModelForm):
     class Meta:
         model = LucrareStatus
@@ -40,11 +41,12 @@ class StatusForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
+
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = '__all__'
-        exclude = ['create_at', 'update_at', 'student']
+        exclude = ['create_at', 'update_at', 'student', 'este_final']
 
     def __init__(self, *args, **kwargs):
         super(DocumentForm, self).__init__(*args, **kwargs)
