@@ -39,7 +39,7 @@
                     <form class="form-inline" type="get" action="{% url 'professor_app:view_professors' %}"
                           style="margin: 0 ">
                         <center><input id="search_box" type="text" name="search_box"
-                                       class="glyphicon glyphicon-search form-control" placeholder=" Search...">
+                                       class="glyphicon glyphicon-search form-control" placeholder=" Cauta...">
                             <button id="search_submits" class="glyphicon glyphicon-search" type="submit"></button>
                         </center>
                     </form>
@@ -83,13 +83,13 @@
                                     <th>
                                         <button class="btn btn-sm" style="color: black;"
                                                 onclick="window.location.href = '{% url 'professor_app:edit_professor' professor.cnp %}';">
-                                            Edit
+                                            Editeaza
                                         </button>
                                     </th>
                                     <th>
                                         <button class="btn btn-sm btn-danger" data-toggle="modal"
                                                 data-target="#myModal{{ professor.cnp }}">
-                                            Delete
+                                            Sterge
                                         </button>
                                 </tr>
                                 <!--// modal-->

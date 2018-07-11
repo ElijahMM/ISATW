@@ -13,7 +13,7 @@ from ProfessorApp.views import (
     StatusView,
     delete_status,
     delete_document,
-    delete_lucrare
+    delete_lucrare,
 )
 
 urlpatterns = [

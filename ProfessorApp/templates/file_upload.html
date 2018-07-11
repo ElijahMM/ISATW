@@ -4,14 +4,20 @@
     <div class="content-agileits">
         <h1 class="title">Fisiere</h1>
         <div class="center">
-            <form class="center" style="text-align: center" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <br>
-                <button class="btn btn-primary" type="submit">Upload</button>
-            </form>
-            <br><br>
-
+            {% if object_list.documents.count == 0 or object_list.last is False %}
+                <form class="center" style="text-align: center" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {{ last.descriere }}
+                    <br>
+                    <div class="checkbox left">
+                        <label><input type="checkbox" name="fisier_final">Fisier Final</label>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary" type="submit">Upload</button>
+                </form>
+                <br><br>
+            {% endif %}
             <h1 class="page-header">Istoric fisier</h1>
 
             <br><br>
@@ -33,21 +39,26 @@
                     <!--Table body-->
                     <tbody>
                     {% for document in object_list.documents %}
-                        <tr>
-                            <th>{{ document.descriere | truncatechars:10   }}</th>
-                            <th>{{ document.document |truncatechars:20  }}</th>
-                            <th>
-                                <button class="btn btn-sm" style="color: black;"
-                                        onclick="window.location.href ='{% url 'professor_app:pdf_view' document.id %}'">
-                                    Vezi Fisier
-                                </button>
+                        {% if document.este_final == True %}
+                            <tr style="background: #4cae4c">
+                                {% else %}
+                            <tr>
+                        {% endif %}
+                    <th>{{ document.descriere | truncatechars:10 }}</th>
+                    <th>{{ document.document |truncatechars:20 }}</th>
 
-                                <button class="btn btn-sm btn-danger" data-toggle="modal"
-                                        data-target="#myModal{{ document.id }}">
-                                    Delete
-                                </button>
-                            </th>
-                        </tr>
+                    <th>
+                        <button class="btn btn-sm" style="color: black;"
+                                onclick="window.location.href ='{% url 'professor_app:pdf_view' document.id %}'">
+                            Vizualizare
+                        </button>
+
+                        <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                data-target="#myModal{{ document.id }}">
+                            Stergere
+                        </button>
+                    </th>
+                    </tr>
                         <!--// modal-->
                         <div class="modal fade" id="myModal{{ document.id }}" role="dialog">
                             <div class="modal-dialog">

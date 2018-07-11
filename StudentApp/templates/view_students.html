@@ -50,7 +50,7 @@
                     <form class="form-inline" type="get" action="{% url 'student_app:view_students' %}"
                           style="margin: 0 ">
                         <center><input id="search_box" type="text" name="search_box"
-                                       class="glyphicon glyphicon-search form-control" placeholder=" Search...">
+                                       class="glyphicon glyphicon-search form-control" placeholder=" Cauta...">
                             <button id="search_submits" class="glyphicon glyphicon-search" type="submit"></button>
                         </center>
                     </form>
@@ -97,13 +97,13 @@
                                         <th>
                                             <button class="btn btn-sm" style="color: black;"
                                                     onclick="window.location.href = '{% url 'student_app:edit_student' student.nr_matricol %}';">
-                                                Edit
+                                                Editeaza
                                             </button>
                                         </th>
                                         <th>
                                         <button class="btn btn-sm btn-danger" data-toggle="modal"
                                                 data-target="#myModal{{ student.nr_matricol }}">
-                                            Delete
+                                            Sterge
                                         </button>
                                     {% endif %}
 

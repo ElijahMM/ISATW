@@ -119,20 +119,25 @@ class FileUpload(LoginRequiredMixin, FormView, ListView, View):
             if form.is_valid():
                 document = form.save(commit=False)
                 document.student = Student.objects.get(nr_matricol=self.kwargs['student_id'])
+                document.este_final = True if self.request.POST.get('fisier_final') else False
                 document.save()
 
                 return redirect(self.request.path_info)
 
     def get_queryset(self):
+        last_item = None
         query = Document.objects.filter(student_id=self.kwargs['student_id'])
-        obj = {'documents': query}
-        return obj
+        if query:
+            last_item = query.reverse().first().este_final
+        return {"documents": query, "last": last_item}
 
 
 def pdf_view(request, *args, **kwargs):
     document = Document.objects.get(id=kwargs['document_id'])
-
+    print(document.descriere)
+    print(document.document.url)
     with open(document.document.url, 'r') as pdf:
+        print("opened")
         response = HttpResponse(pdf.read(), content_type='application/pdf')
         response['Content-Disposition'] = 'inline;filename=some_file.pdf'
         return response
